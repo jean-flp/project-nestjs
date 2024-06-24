@@ -1,0 +1,5 @@
+dto = Data Transfer Object
+DTO's sao objetos que carregam dados entre processos em ordem de reduzir o numero de chamada de metodos.
+
+trabalhar com os dados advindos do cliente ("mundo externo") para dentro, o controller.
+

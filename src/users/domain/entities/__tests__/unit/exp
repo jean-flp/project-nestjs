@@ -1,0 +1,4 @@
+Jester
+describe(name,fn): Cria um bloco que agrupa varios testes relacionados
+beforeEach(fn,timeout): Executa essa função antes de cada teste no arquivo ser executado, se houver promises, o jester ira esperar antes do teste, voce pode por timeout (mms) de espera antes de abort.
+it: cria uma instancia de teste
