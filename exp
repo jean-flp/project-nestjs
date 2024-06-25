@@ -1,0 +1,3 @@
+add npm i uuid
+add npm i -d @types/uuid
+add npm i @faker-js/faker

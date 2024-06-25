@@ -1,3 +1,5 @@
+import { Entity } from "@/shared/domain/entities/entity"
+
 //props q um usuario ira possuir
 export type UserProps = {
     name : string
@@ -5,10 +7,12 @@ export type UserProps = {
     password: string
     createdAt?: Date
 }
+//excessao no DDD e clean arch para utilização de lib na camada de dominio, uuidv4
 
 
-export class UserEntity {
-    constructor(public readonly props:UserProps){
+export class UserEntity extends Entity<UserProps>{
+    constructor(public readonly props:UserProps, id?:string){
+        super(props,id);
         this.props.createdAt = this.props.createdAt ?? new Date();
     }
 
