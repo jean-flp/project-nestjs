@@ -33,4 +33,33 @@ describe('InMemoryRepository Unit test', ()=>{
         const searchedEntity = await sut.findById(entity.id);
         expect(entity.toJSON()).toStrictEqual(searchedEntity.toJSON());
     })
+    it('Should return all entities',async ()=>{
+        const entity = new StubEntity({name: 'test',price: 3});
+        await sut.insert(entity);
+
+        const searchedEntity = await sut.findAll();
+        expect([entity]).toStrictEqual(searchedEntity);
+    })
+    it('Should throw erro on a attempt of an update when entity not found',async ()=>{
+        const entity = new StubEntity({name: 'test',price: 3});
+        
+        expect(sut.update(entity)).rejects.toThrow(new NotFoundError('Entity not found.'));
+    })
+    it('Should update an entity',async ()=>{
+        const entity = new StubEntity({name: 'test',price: 3});
+        await sut.insert(entity);
+        const updatedEntity = new StubEntity({name: 'saluted',price: 999},entity._id);
+        await sut.update(updatedEntity);
+        expect(updatedEntity.toJSON()).toStrictEqual(sut.items[0].toJSON());
+    })
+    it('Should throw a NotFoundError when deleting an entity',async ()=>{
+        await expect(sut.delete('WRONG_ID')).rejects.toThrow(new NotFoundError('Entity not found.'));
+    })
+    it('Should delete an entity',async ()=>{
+        const entity = new StubEntity({name: 'test',price: 3});
+        await sut.insert(entity);
+        await sut.delete(entity.id);
+
+        expect(sut.items).toStrictEqual([]);
+    })
 })
